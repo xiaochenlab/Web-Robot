@@ -1,0 +1,228 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import GlowCursor from './components/GlowCursor/index';
+import StarBorder from './components/StarBorder/StarBorder';
+import SplitText from './components/SplitText/SplitText';
+import LogoLoop from './components/LogoLoop/LogoLoop';
+import AnimatedList from './components/AnimatedList/AnimatedList';
+import qrcode from './images/1778377124951.png';
+import alipay from './images/alipay.jpg';
+import './App.css';
+
+const listItems = [
+  '🚀 爬虫开发',
+  '🎨 具体开发',
+  '💡 框架',
+  '🛠️ 技术栈展示',
+  '📱 js逆向',
+  '🔮 框架',
+  '⚡ 高性能优化',
+  '🌐 自动化',
+  '📦 联系我',
+];
+
+const techLogos = [
+  {
+    node: <span className="tech-logo-text">QQ邮箱</span>,
+    onClick: () => window.open("https://www.qq.com/", "_blank")
+  },
+  { node: <span className="tech-logo-text">Vue</span> },
+  { node: <span className="tech-logo-text">Next.js</span> },
+  { node: <span className="tech-logo-text">Node.js</span> },
+  { node: <span className="tech-logo-text">Python</span> },
+  { node: <span className="tech-logo-text">Git</span> },
+];
+
+function App() {
+  const [showIntro, setShowIntro] = useState(true);
+  const [showPayment, setShowPayment] = useState(false);
+  const [showWechat, setShowWechat] = useState(false);
+  const [showAlipay, setShowAlipay] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleItemSelect = useCallback((item) => {
+    if (item === '🎨 具体开发') setShowPayment(true);
+  }, []);
+
+  const closeModal = useCallback((setter) => () => setter(false), []);
+
+  if (showIntro) {
+    return (
+      <div className="intro-screen">
+        <h1 className="hello-text">Hello 👋</h1>
+      </div>
+    );
+  }
+
+  const hasModal = showPayment || showWechat || showAlipay;
+
+  return (
+    <div className="App" style={{ minHeight: '100vh' }}>
+      <GlowCursor
+        color="#67E8F9"
+        secondaryColor="#A78BFA"
+        trailLength={20}
+        trailWidth={6}
+        followSpeed={0.16}
+        glowIntensity={1.2}
+        glowSpread={0.8}
+        hotspot={0.5}
+        brightness={1.0}
+        opacity={1}
+        pulseSpeed={1.1}
+        noiseStrength={0}
+        idleFade={true}
+        idleTimeout={700}
+        fadeDuration={900}
+        blendMode="screen"
+        maxDevicePixelRatio={1}
+        enabled={!hasModal}
+      >
+        <div className="main-content">
+          <div className="hero-section">
+            <div style={{ animation: 'fadeInWrapper 0.01s 0.3s both' }}>
+              <SplitText
+                text="Welcome xiaochen DEV"
+                tag="h1"
+                delay={80}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 60 }}
+                to={{ opacity: 1, y: 0 }}
+                textAlign="center"
+              />
+            </div>
+
+            <div style={{ animation: 'fadeInWrapper 0.01s 2s both' }}>
+              <SplitText
+                text="XiaoChen Dev — 代码构筑创意"
+                tag="p"
+                className="subtitle-text"
+                delay={40}
+                duration={0.5}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 20 }}
+                to={{ opacity: 1, y: 0 }}
+                textAlign="center"
+              />
+            </div>
+          </div>
+
+          <section style={{ padding: '4rem 2rem', display: 'flex', justifyContent: 'center' }}>
+            <AnimatedList
+              items={listItems}
+              onItemSelect={handleItemSelect}
+              showGradients={false}
+              enableArrowNavigation={true}
+              displayScrollbar={true}
+            />
+          </section>
+
+          <section style={{ padding: '4rem 2rem', display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <StarBorder
+              as="button"
+              color="#67E8F9"
+              speed="5s"
+              thickness={1}
+              backgroundColor="#0a0a1a"
+              textColor="#67E8F9"
+              borderColor="#333"
+              onClick={() => setShowPayment(true)}
+            >
+              支持一下
+            </StarBorder>
+
+            <StarBorder
+              as="a"
+              href="https://mail.3808283712@qq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="#A78BFA"
+              speed="4s"
+              thickness={2}
+              backgroundColor="#0a0a1a"
+              textColor="#A78BFA"
+              borderColor="#333"
+            >
+              联系我
+            </StarBorder>
+          </section>
+
+          {/* 开源项目区域 */}
+          <section style={{ padding: '4rem 2rem', display: 'flex', justifyContent: 'center' }}>
+            <a
+              href="https://github.com/xiaochenlab/Web-Robot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card"
+            >
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <h2 style={{ color: '#f0ece4', margin: '0 0 0.5rem', fontSize: '1.2rem' }}>开源项目</h2>
+                <p style={{ color: '#7a7570', margin: 0, fontSize: '0.9rem' }}>Github上项目</p>
+              </div>
+              <div className="project-card-glow"></div>
+            </a>
+          </section>
+
+          <div className="tech-bar">
+            <LogoLoop
+              logos={techLogos}
+              speed={100}
+              direction="left"
+              logoHeight={30}
+              gap={60}
+              hoverSpeed={0}
+              scaleOnHover
+            />
+          </div>
+        </div>
+      </GlowCursor>
+
+      {showPayment && (
+        <div className="modal-overlay" onClick={closeModal(setShowPayment)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 className="modal-title">选择付款方式 💙</h3>
+            <div className="modal-actions">
+              <button className="modal-btn modal-btn-wechat"
+                onClick={() => { setShowPayment(false); setShowWechat(true); }}>
+                💚 微信支付
+              </button>
+              <button className="modal-btn modal-btn-alipay"
+                onClick={() => { setShowPayment(false); setShowAlipay(true); }}>
+                💙 支付宝
+              </button>
+            </div>
+            <p className="modal-hint">点击空白处关闭</p>
+          </div>
+        </div>
+      )}
+
+      {showWechat && (
+        <div className="modal-overlay" onClick={closeModal(setShowWechat)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ color: '#07c160', marginBottom: '1rem' }}>微信付款 💚</h3>
+            <img src={qrcode} alt="微信收款码" className="modal-qr-img" loading="lazy" />
+            <p className="modal-qr-hint">点击空白处关闭</p>
+          </div>
+        </div>
+      )}
+
+      {showAlipay && (
+        <div className="modal-overlay" onClick={closeModal(setShowAlipay)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ color: '#1677ff', marginBottom: '1rem' }}>支付宝付款 💙</h3>
+            <img src={alipay} alt="支付宝收款码" className="modal-qr-img" loading="lazy" />
+            <p className="modal-qr-hint">点击空白处关闭</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
