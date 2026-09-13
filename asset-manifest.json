@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Web-Robot/static/css/main.bd7fcdbb.css",
+    "main.js": "/Web-Robot/static/js/main.620165df.js",
+    "static/js/453.f72863bc.chunk.js": "/Web-Robot/static/js/453.f72863bc.chunk.js",
+    "static/media/alipay.jpg": "/Web-Robot/static/media/alipay.3826e2e953a45c14b709.jpg",
+    "static/media/1778377124951.png": "/Web-Robot/static/media/1778377124951.d0ea9395c5dbb39ff9ff.png",
+    "index.html": "/Web-Robot/index.html",
+    "main.bd7fcdbb.css.map": "/Web-Robot/static/css/main.bd7fcdbb.css.map",
+    "main.620165df.js.map": "/Web-Robot/static/js/main.620165df.js.map",
+    "453.f72863bc.chunk.js.map": "/Web-Robot/static/js/453.f72863bc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd7fcdbb.css",
+    "static/js/main.620165df.js"
+  ]
+}
